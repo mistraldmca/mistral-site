@@ -1,28 +1,14 @@
 import React from 'react';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import SupportedPlatforms from './components/SupportedPlatforms';
-import HowItWorks from './components/HowItWorks';
-import Coverage from './components/Coverage';
-import Pricing from './components/Pricing';
-import Testimonials from './components/Testimonials';
-import FAQ from './components/FAQ';
-import FinalCTA from './components/FinalCTA';
+import HomePage from './components/HomePage';
 import Footer from './components/Footer';
 
 function App() {
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans">
       <Navbar />
-      <main>
-        <Hero />
-        <SupportedPlatforms />
-        <HowItWorks />
-        <Coverage />
-        <Testimonials />
-        <Pricing />
-        <FAQ />
-        <FinalCTA />
+      <main className="flex-grow flex flex-col w-full relative">
+        <HomePage />
       </main>
       <Footer />
     </div>

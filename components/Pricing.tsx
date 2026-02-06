@@ -4,6 +4,10 @@ import Button from './Button';
 import { Check, Shield } from 'lucide-react';
 
 const Pricing: React.FC = () => {
+  const scrollToContact = () => {
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   const features = [
     "Unlimited DMCA takedowns",
     "Google & Bing Search delisting",
@@ -45,7 +49,7 @@ const Pricing: React.FC = () => {
                  </div>
                </div>
 
-               <Button fullWidth size="lg" className="mb-4 shadow-xl shadow-indigo-500/20">
+               <Button fullWidth size="lg" className="mb-4 shadow-xl shadow-indigo-500/20" onClick={scrollToContact}>
                  Start Free Leak Scan
                </Button>
                <p className="text-xs text-center text-slate-400">

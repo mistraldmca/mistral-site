@@ -3,6 +3,10 @@ import { ArrowRight, CheckCircle2, Shield, Lock, Search, FileX } from 'lucide-re
 import Button from './Button';
 
 const Hero: React.FC = () => {
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
       {/* Background Decor */}
@@ -30,10 +34,10 @@ const Hero: React.FC = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-8">
-              <Button size="lg" onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}>
+              <Button size="lg" onClick={() => scrollToSection('pricing')}>
                 Start Free Leak Scan <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
-              <Button variant="secondary" size="lg" onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}>
+              <Button variant="secondary" size="lg" onClick={() => scrollToSection('how-it-works')}>
                 How It Works
               </Button>
             </div>
