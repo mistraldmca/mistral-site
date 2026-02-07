@@ -66,8 +66,8 @@ const Pricing: React.FC = () => {
 
           {/* One-Time Removals Plan */}
           <div className="relative bg-gradient-to-b from-[#F6F3FF] to-white rounded-3xl shadow-2xl shadow-purple-100 border border-indigo-200 overflow-hidden flex flex-col transform md:-translate-y-2 transition-transform">
-            {/* Badge */}
-            <div className="absolute top-6 right-6 z-10">
+            {/* Desktop Badge: Top Right */}
+            <div className="absolute top-6 right-6 z-10 hidden md:block">
                 <span className="bg-purple-100 text-purple-700 text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wide border border-purple-200/50">
                     Popular for Large Leaks
                 </span>
@@ -76,9 +76,17 @@ const Pricing: React.FC = () => {
             <div className="absolute top-0 inset-x-0 h-2 bg-gradient-to-r from-purple-400 to-indigo-400 opacity-80"></div>
             
             <div className="p-8 md:p-10 flex flex-col h-full">
-               <div className="flex items-center gap-2 mb-6">
-                 <Zap className="text-purple-600 w-6 h-6" />
-                 <span className="font-bold text-slate-900 tracking-wide uppercase text-sm">One-Time Removals</span>
+               <div className="mb-6">
+                   <div className="flex items-center gap-2">
+                     <Zap className="text-purple-600 w-6 h-6" />
+                     <span className="font-bold text-slate-900 tracking-wide uppercase text-sm">One-Time Removals</span>
+                   </div>
+                   {/* Mobile Badge: Below Title */}
+                   <div className="md:hidden mt-3">
+                        <span className="bg-purple-100 text-purple-700 text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wide border border-purple-200/50 inline-block">
+                            Popular for Large Leaks
+                        </span>
+                   </div>
                </div>
                
                <div className="mb-8">
