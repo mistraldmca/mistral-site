@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, CheckCircle2, Shield, Lock, Search, FileX } from 'lucide-react';
+import { ArrowRight, Shield, Lock, Search, FileX } from 'lucide-react';
 import Button from './Button';
 
 const Hero: React.FC = () => {
@@ -42,15 +42,14 @@ const Hero: React.FC = () => {
               </Button>
             </div>
 
-            <div className="flex flex-col lg:flex-row items-center gap-2">
-                <p className="text-sm font-medium text-slate-500">
-                    Free for 7 days. Then $100/month.
-                </p>
+            <div className="flex flex-col lg:flex-row items-center gap-3">
+                <span className="text-sm font-medium text-slate-500">
+                    $199/month
+                </span>
                 <div className="hidden lg:block w-1 h-1 bg-slate-300 rounded-full"></div>
-                <div className="flex items-center gap-4 text-xs text-slate-400">
-                    <span className="flex items-center gap-1"><CheckCircle2 className="w-3 h-3" /> No card required</span>
-                    <span className="flex items-center gap-1"><CheckCircle2 className="w-3 h-3" /> Cancel anytime</span>
-                </div>
+                <span className="text-sm font-medium text-slate-500">
+                    Cancel anytime
+                </span>
             </div>
           </div>
 
