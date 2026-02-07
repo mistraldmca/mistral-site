@@ -17,7 +17,6 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="font-bold text-slate-900 mb-4">Product</h4>
             <ul className="space-y-2 text-sm text-slate-600">
-              <li><a href="#how-it-works" className="hover:text-indigo-600">How it Works</a></li>
               <li><a href="#features" className="hover:text-indigo-600">Coverage</a></li>
               <li><a href="#pricing" className="hover:text-indigo-600">Pricing</a></li>
             </ul>

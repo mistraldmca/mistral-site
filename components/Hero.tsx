@@ -37,9 +37,6 @@ const Hero: React.FC = () => {
               <Button size="lg" onClick={() => scrollToSection('pricing')}>
                 Start Free Leak Scan <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
-              <Button variant="secondary" size="lg" onClick={() => scrollToSection('how-it-works')}>
-                How It Works
-              </Button>
             </div>
 
             <div className="flex flex-col lg:flex-row items-center gap-3">

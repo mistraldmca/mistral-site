@@ -23,9 +23,8 @@ const Navbar: React.FC = () => {
   };
 
   const navLinks = [
-    { name: 'How it Works', id: 'how-it-works' },
-    { name: 'Supported Platforms', id: 'platforms' },
     { name: 'Coverage', id: 'features' },
+    { name: 'Testimonials', id: 'testimonials' },
     { name: 'Pricing', id: 'pricing' },
     { name: 'FAQ', id: 'faq' },
   ];
