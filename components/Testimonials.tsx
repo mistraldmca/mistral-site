@@ -11,13 +11,15 @@ const Testimonials: React.FC = () => {
     {
       name: "Vanna",
       role: "Digital Influencer",
-      image: "https://i.imgur.com/dGQn8k9.jpeg", 
+      // Changed .jpeg to .jpg for maximum compatibility
+      image: "https://i.imgur.com/dGQn8k9.jpg", 
       quote: "Mistral handles everything automatically, I manage everything from my phone. Since they've protected my content, my earnings have gone up because fans are paying for MY scenes, not leaks."
     },
     {
       name: "Drea",
       role: "Top 0.5% Creator",
-      image: "https://i.imgur.com/LEqd5ia.jpeg",
+      // Changed .jpeg to .jpg for maximum compatibility
+      image: "https://i.imgur.com/LEqd5ia.jpg",
       quote: "I used to spend hours stressing over leaked content appearing on random forums. Mistral wipes them out before I even see them. It's not just protection, it's peace of mind."
     }
   ];
@@ -62,6 +64,7 @@ const Testimonials: React.FC = () => {
                     src={review.image} 
                     alt={review.name} 
                     className="w-full h-full object-cover object-center"
+                    loading="eager"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90"></div>
                   <div className="absolute bottom-4 left-6 text-white">
@@ -104,6 +107,7 @@ const Testimonials: React.FC = () => {
               src={reviews[0].image} 
               alt={reviews[0].name} 
               className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+              loading="eager"
             />
             <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-20">
               <p className="text-white font-bold text-xl">{reviews[0].name}</p>
@@ -149,6 +153,7 @@ const Testimonials: React.FC = () => {
               src={reviews[1].image} 
               alt={reviews[1].name} 
               className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+              loading="eager"
             />
             <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-20">
               <p className="text-white font-bold text-xl">{reviews[1].name}</p>
