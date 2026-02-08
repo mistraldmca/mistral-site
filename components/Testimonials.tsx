@@ -59,10 +59,16 @@ const Testimonials: React.FC = () => {
           
           {/* Left Card (Vanna) */}
           <div 
-            className={`col-span-3 h-[400px] rounded-3xl relative overflow-hidden cursor-pointer transition-all duration-500 ease-out transform group ${active === 0 ? 'scale-100 ring-4 ring-indigo-500 ring-offset-4 shadow-2xl z-20' : 'scale-90 opacity-50 hover:opacity-80 hover:scale-95 grayscale'}`}
+            className={`col-span-3 h-[400px] rounded-3xl relative overflow-hidden cursor-pointer transition-all duration-500 ease-out transform group bg-slate-200 ${active === 0 ? 'scale-100 ring-4 ring-indigo-500 ring-offset-4 shadow-2xl z-20' : 'scale-90 opacity-50 hover:opacity-80 hover:scale-95 grayscale'}`}
             onClick={() => setActive(0)}
           >
-            <img src={reviews[0].image} alt="Vanna" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" loading="eager" />
+            <img 
+              src={reviews[0].image} 
+              alt={reviews[0].name} 
+              className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" 
+              loading="eager"
+              referrerPolicy="no-referrer"
+            />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
             <div className="absolute bottom-6 left-6 text-white">
               <h3 className="text-2xl font-bold">{reviews[0].name}</h3>
@@ -101,10 +107,16 @@ const Testimonials: React.FC = () => {
 
           {/* Right Card (Drea) */}
           <div 
-            className={`col-span-3 h-[400px] rounded-3xl relative overflow-hidden cursor-pointer transition-all duration-500 ease-out transform group ${active === 1 ? 'scale-100 ring-4 ring-indigo-500 ring-offset-4 shadow-2xl z-20' : 'scale-90 opacity-50 hover:opacity-80 hover:scale-95 grayscale'}`}
+            className={`col-span-3 h-[400px] rounded-3xl relative overflow-hidden cursor-pointer transition-all duration-500 ease-out transform group bg-slate-200 ${active === 1 ? 'scale-100 ring-4 ring-indigo-500 ring-offset-4 shadow-2xl z-20' : 'scale-90 opacity-50 hover:opacity-80 hover:scale-95 grayscale'}`}
             onClick={() => setActive(1)}
           >
-            <img src={reviews[1].image} alt="Drea" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" loading="eager" />
+            <img 
+              src={reviews[1].image} 
+              alt={reviews[1].name} 
+              className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" 
+              loading="eager"
+              referrerPolicy="no-referrer"
+            />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
             <div className="absolute bottom-6 left-6 text-white">
               <h3 className="text-2xl font-bold">{reviews[1].name}</h3>
@@ -120,12 +132,12 @@ const Testimonials: React.FC = () => {
         {/* MOBILE LAYOUT (Tab Switcher) */}
         <div className="md:hidden">
             {/* Mobile Tabs */}
-            <div className="flex p-1 bg-slate-100 rounded-xl mb-6 mx-auto max-w-xs shadow-inner">
+            <div className="flex p-1.5 bg-slate-200/50 rounded-2xl mb-8 mx-auto max-w-sm shadow-inner border border-slate-100/50">
                 {reviews.map((review, idx) => (
                 <button
                     key={idx}
                     onClick={() => setActive(idx)}
-                    className={`flex-1 py-2.5 text-sm font-bold rounded-lg transition-all duration-200 ${active === idx ? 'bg-white text-indigo-600 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                    className={`flex-1 py-3 text-sm font-bold rounded-xl transition-all duration-300 ${active === idx ? 'bg-white text-indigo-600 shadow-md transform scale-100' : 'text-slate-500 hover:text-slate-700 scale-95'}`}
                 >
                     {review.name}
                 </button>
@@ -133,24 +145,31 @@ const Testimonials: React.FC = () => {
             </div>
 
             {/* Mobile Card */}
-            <div className="relative bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100">
+            <div className="relative bg-white rounded-[2rem] shadow-2xl overflow-hidden border border-slate-100">
                 {/* Image Area */}
-                <div className="relative h-[400px] w-full">
+                <div className="relative h-[450px] w-full bg-slate-200">
                    {reviews.map((review, idx) => (
                       <div 
                         key={idx}
-                        className={`absolute inset-0 transition-opacity duration-500 ${active === idx ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
+                        className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${active === idx ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
                       >
-                         <img src={review.image} alt={review.name} className="w-full h-full object-cover" loading="eager" />
-                         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent"></div>
-                         <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                            <div className="flex justify-between items-end">
+                         <img 
+                           src={review.image} 
+                           alt={review.name} 
+                           className="w-full h-full object-cover text-transparent" // text-transparent hides alt text styling in some browsers
+                           loading="eager"
+                           referrerPolicy="no-referrer"
+                         />
+                         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-90"></div>
+                         
+                         <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
+                            <div className="flex justify-between items-end gap-4">
                                 <div>
-                                    <h3 className="text-3xl font-bold mb-1">{review.name}</h3>
-                                    <p className="text-white/80 text-sm font-medium">{review.role}</p>
+                                    <h3 className="text-4xl font-bold mb-2 tracking-tight">{review.name}</h3>
+                                    <p className="text-white/90 text-base font-medium">{review.role}</p>
                                 </div>
-                                <div className="bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/20">
-                                    <span className="text-xs font-bold tracking-wide">{review.stat}</span>
+                                <div className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-xl border border-white/20 shadow-lg mb-1">
+                                    <span className="text-xs font-bold tracking-wide uppercase whitespace-nowrap">{review.stat}</span>
                                 </div>
                             </div>
                         </div>
@@ -159,21 +178,24 @@ const Testimonials: React.FC = () => {
                 </div>
 
                 {/* Text Area */}
-                <div className="p-8 relative min-h-[200px] flex items-center">
-                    <Quote className="absolute top-6 left-6 w-8 h-8 text-indigo-500 opacity-20" />
+                <div className="p-8 relative min-h-[220px] flex items-center bg-white">
+                    <Quote className="absolute top-6 left-6 w-10 h-10 text-indigo-500 opacity-10" />
                     {reviews.map((review, idx) => (
-                         <p 
+                         <div 
                             key={idx}
-                            className={`text-lg text-slate-700 leading-relaxed font-medium transition-all duration-500 absolute inset-x-8 top-1/2 -translate-y-1/2 ${active === idx ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8 pointer-events-none'}`}
+                            className={`transition-all duration-500 absolute inset-x-8 top-1/2 -translate-y-1/2 flex flex-col justify-center ${active === idx ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12 pointer-events-none'}`}
                          >
-                            "{review.quote}"
-                        </p>
+                            <p className="text-xl text-slate-700 leading-relaxed font-medium">
+                                "{review.quote}"
+                            </p>
+                        </div>
                     ))}
                 </div>
                 
                 {/* Mobile Progress Bar */}
-                <div key={active} className="h-1 bg-indigo-50 w-full">
-                     <div className="h-full bg-indigo-500 animate-[progress_8s_linear] origin-left"></div>
+                <div className="h-1.5 bg-indigo-50 w-full relative overflow-hidden">
+                     {/* We remount the progress bar when active changes to restart animation */}
+                     <div key={active} className="absolute inset-y-0 left-0 bg-indigo-500 animate-[progress_8s_linear] w-full origin-left"></div>
                 </div>
             </div>
         </div>
@@ -181,8 +203,8 @@ const Testimonials: React.FC = () => {
       </div>
       <style>{`
         @keyframes progress {
-          from { width: 0%; }
-          to { width: 100%; }
+          from { transform: scaleX(0); }
+          to { transform: scaleX(1); }
         }
       `}</style>
     </Section>
