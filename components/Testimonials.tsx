@@ -10,7 +10,7 @@ const Testimonials: React.FC = () => {
       id: 0,
       name: "Vanna",
       role: "Digital Influencer",
-      image: "https://i.imgur.com/dGQn8k9.jpg",
+      image: "https://i.imgur.com/t5Fswbj.jpeg",
       quote: "Mistral handles everything automatically, I manage everything from my phone. Since they've protected my content, my earnings have gone up because fans are paying for MY scenes, not leaks.",
       stat: "+40% Revenue"
     },
@@ -18,7 +18,7 @@ const Testimonials: React.FC = () => {
       id: 1,
       name: "Drea",
       role: "Top 0.5% Creator",
-      image: "https://i.imgur.com/LEqd5ia.jpg",
+      image: "https://i.imgur.com/nSBtIzt.jpeg",
       quote: "I used to spend hours stressing over leaked content appearing on random forums. Mistral wipes them out before I even see them. It's not just protection, it's peace of mind.",
       stat: "Hours Saved"
     }
@@ -59,15 +59,14 @@ const Testimonials: React.FC = () => {
           
           {/* Left Card (Vanna) */}
           <div 
-            className={`col-span-3 h-[400px] rounded-3xl relative overflow-hidden cursor-pointer transition-all duration-500 ease-out transform group bg-slate-200 ${active === 0 ? 'scale-100 ring-4 ring-indigo-500 ring-offset-4 shadow-2xl z-20' : 'scale-90 opacity-50 hover:opacity-80 hover:scale-95 grayscale'}`}
+            className={`col-span-3 h-[400px] rounded-3xl relative overflow-hidden cursor-pointer transition-all duration-500 ease-out transform group bg-slate-200 mb-6 ${active === 0 ? 'scale-100 ring-4 ring-indigo-500 ring-offset-4 shadow-2xl z-20' : 'scale-90 opacity-50 hover:opacity-80 hover:scale-95 grayscale'}`}
             onClick={() => setActive(0)}
           >
             <img 
               src={reviews[0].image} 
               alt={reviews[0].name} 
-              className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" 
+              className="w-full h-full object-cover block transition-transform duration-1000 group-hover:scale-105" 
               loading="eager"
-              referrerPolicy="no-referrer"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
             <div className="absolute bottom-6 left-6 text-white">
@@ -107,15 +106,14 @@ const Testimonials: React.FC = () => {
 
           {/* Right Card (Drea) */}
           <div 
-            className={`col-span-3 h-[400px] rounded-3xl relative overflow-hidden cursor-pointer transition-all duration-500 ease-out transform group bg-slate-200 ${active === 1 ? 'scale-100 ring-4 ring-indigo-500 ring-offset-4 shadow-2xl z-20' : 'scale-90 opacity-50 hover:opacity-80 hover:scale-95 grayscale'}`}
+            className={`col-span-3 h-[400px] rounded-3xl relative overflow-hidden cursor-pointer transition-all duration-500 ease-out transform group bg-slate-200 mb-6 ${active === 1 ? 'scale-100 ring-4 ring-indigo-500 ring-offset-4 shadow-2xl z-20' : 'scale-90 opacity-50 hover:opacity-80 hover:scale-95 grayscale'}`}
             onClick={() => setActive(1)}
           >
             <img 
               src={reviews[1].image} 
               alt={reviews[1].name} 
-              className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" 
+              className="w-full h-full object-cover block transition-transform duration-1000 group-hover:scale-105" 
               loading="eager"
-              referrerPolicy="no-referrer"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
             <div className="absolute bottom-6 left-6 text-white">
@@ -147,7 +145,7 @@ const Testimonials: React.FC = () => {
             {/* Mobile Card */}
             <div className="relative bg-white rounded-[2rem] shadow-2xl overflow-hidden border border-slate-100">
                 {/* Image Area */}
-                <div className="relative h-[450px] w-full bg-slate-200">
+                <div className="relative h-[450px] w-full bg-slate-200 mb-10">
                    {reviews.map((review, idx) => (
                       <div 
                         key={idx}
@@ -156,9 +154,8 @@ const Testimonials: React.FC = () => {
                          <img 
                            src={review.image} 
                            alt={review.name} 
-                           className="w-full h-full object-cover text-transparent" // text-transparent hides alt text styling in some browsers
+                           className="w-full h-full object-cover block"
                            loading="eager"
-                           referrerPolicy="no-referrer"
                          />
                          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-90"></div>
                          
@@ -178,7 +175,7 @@ const Testimonials: React.FC = () => {
                 </div>
 
                 {/* Text Area */}
-                <div className="p-8 relative min-h-[220px] flex items-center bg-white">
+                <div className="px-8 pt-8 pb-12 relative min-h-[300px] flex items-center bg-white">
                     <Quote className="absolute top-6 left-6 w-10 h-10 text-indigo-500 opacity-10" />
                     {reviews.map((review, idx) => (
                          <div 
