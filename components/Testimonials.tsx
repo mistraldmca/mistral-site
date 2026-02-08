@@ -1,174 +1,190 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Section from './Section';
-import { Quote } from 'lucide-react';
+import { Quote, Star, ShieldCheck } from 'lucide-react';
 
 const Testimonials: React.FC = () => {
-  const [activeTab, setActiveTab] = useState(0);
-  const [mobileIndex, setMobileIndex] = useState(0);
-  const scrollRef = useRef<HTMLDivElement>(null);
-
+  const [active, setActive] = useState(0);
+  
   const reviews = [
     {
+      id: 0,
       name: "Vanna",
       role: "Digital Influencer",
-      // Direct HTTPS .jpg URL
-      image: "https://i.imgur.com/dGQn8k9.jpg", 
-      quote: "Mistral handles everything automatically, I manage everything from my phone. Since they've protected my content, my earnings have gone up because fans are paying for MY scenes, not leaks."
+      image: "https://i.imgur.com/dGQn8k9.jpg",
+      quote: "Mistral handles everything automatically, I manage everything from my phone. Since they've protected my content, my earnings have gone up because fans are paying for MY scenes, not leaks.",
+      stat: "+40% Revenue"
     },
     {
+      id: 1,
       name: "Drea",
       role: "Top 0.5% Creator",
-      // Direct HTTPS .jpg URL
       image: "https://i.imgur.com/LEqd5ia.jpg",
-      quote: "I used to spend hours stressing over leaked content appearing on random forums. Mistral wipes them out before I even see them. It's not just protection, it's peace of mind."
+      quote: "I used to spend hours stressing over leaked content appearing on random forums. Mistral wipes them out before I even see them. It's not just protection, it's peace of mind.",
+      stat: "Hours Saved"
     }
   ];
 
-  const handleScroll = () => {
-    if (scrollRef.current) {
-      const scrollPosition = scrollRef.current.scrollLeft;
-      const cardWidth = scrollRef.current.firstElementChild?.clientWidth || 0;
-      const index = Math.round(scrollPosition / cardWidth);
-      setMobileIndex(index);
-    }
-  };
+  // Auto-play logic
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActive((prev) => (prev + 1) % reviews.length);
+    }, 8000);
+    return () => clearInterval(interval);
+  }, [reviews.length]);
 
   return (
-    <Section id="testimonials" className="bg-gradient-to-b from-white to-slate-50">
-      <div className="text-center mb-12 md:mb-16">
-        <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">Real Stories, Real Impact</h2>
-        <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-          Empowering creators with AI-driven protection, hear how it's making a difference.
-        </p>
+    <Section id="testimonials" className="bg-slate-50 relative overflow-hidden">
+      {/* Decorative Background Elements */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-indigo-200/20 rounded-full blur-[100px] -translate-y-1/2"></div>
+        <div className="absolute top-1/2 right-1/4 w-96 h-96 bg-purple-200/20 rounded-full blur-[100px] -translate-y-1/2"></div>
       </div>
 
-      <div className="max-w-6xl mx-auto">
-        
-        {/* MOBILE CAROUSEL LAYOUT */}
-        <div className="md:hidden">
+      <div className="relative z-10 max-w-7xl mx-auto px-4">
+        <div className="text-center mb-12 md:mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100 mb-6">
+            <Star className="w-4 h-4 text-indigo-600 fill-indigo-600" />
+            <span className="text-xs font-bold text-indigo-700 uppercase tracking-wide">Success Stories</span>
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">
+            Creators Trust Mistral
+          </h2>
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+            Join thousands of creators who reclaimed their content and revenue.
+          </p>
+        </div>
+
+        {/* DESKTOP LAYOUT */}
+        <div className="hidden md:grid grid-cols-12 gap-8 items-center h-[500px]">
+          
+          {/* Left Card (Vanna) */}
           <div 
-            ref={scrollRef}
-            onScroll={handleScroll}
-            className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-6 px-4 -mx-4 scrollbar-hide"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            className={`col-span-3 h-[400px] rounded-3xl relative overflow-hidden cursor-pointer transition-all duration-500 ease-out transform group ${active === 0 ? 'scale-100 ring-4 ring-indigo-500 ring-offset-4 shadow-2xl z-20' : 'scale-90 opacity-50 hover:opacity-80 hover:scale-95 grayscale'}`}
+            onClick={() => setActive(0)}
           >
-            {reviews.map((review, idx) => (
-              <div 
-                key={idx} 
-                className="flex-none w-[85vw] snap-center bg-white rounded-3xl shadow-lg border border-slate-100 overflow-hidden flex flex-col"
-              >
-                {/* 
-                  Rebuilt Image Container for Mobile:
-                  - Explicit height (h-[400px]) ensures space is reserved.
-                  - No overlay covering the image.
-                  - Direct img tag with object-cover.
-                */}
-                <div className="relative w-full h-[400px] bg-slate-100">
-                  <img 
-                    src={review.image} 
-                    alt={review.name} 
-                    className="w-full h-full object-cover block"
-                    loading="eager"
-                  />
+            <img src={reviews[0].image} alt="Vanna" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" loading="eager" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+            <div className="absolute bottom-6 left-6 text-white">
+              <h3 className="text-2xl font-bold">{reviews[0].name}</h3>
+              <p className="text-white/80 text-sm">{reviews[0].role}</p>
+            </div>
+            {/* Animated Progress Bar */}
+            {active === 0 && (
+               <div className="absolute bottom-0 left-0 h-1.5 bg-indigo-500 animate-[progress_8s_linear]"></div>
+            )}
+          </div>
+
+          {/* Center Content (Quote) */}
+          <div className="col-span-6 flex flex-col items-center text-center px-4 relative">
+             <Quote className="w-16 h-16 text-indigo-200 mb-8 absolute -top-12 left-1/2 -translate-x-1/2" />
+             
+             <div className="relative h-[250px] w-full flex items-center justify-center">
+                {reviews.map((review, idx) => (
+                  <div 
+                    key={idx}
+                    className={`absolute inset-0 flex flex-col items-center justify-center transition-all duration-700 ease-in-out ${active === idx ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95 pointer-events-none'}`}
+                  >
+                     <p className="text-2xl md:text-3xl font-medium text-slate-900 leading-relaxed mb-8 font-serif-logo">
+                       "{review.quote}"
+                     </p>
+                     
+                     <div className="flex items-center gap-3">
+                        <div className="bg-white/80 backdrop-blur-sm px-5 py-2.5 rounded-full border border-indigo-100 flex items-center gap-2 shadow-sm">
+                           <ShieldCheck className="w-4 h-4 text-indigo-600" />
+                           <span className="text-indigo-900 font-bold text-sm">{review.stat}</span>
+                        </div>
+                     </div>
+                  </div>
+                ))}
+             </div>
+          </div>
+
+          {/* Right Card (Drea) */}
+          <div 
+            className={`col-span-3 h-[400px] rounded-3xl relative overflow-hidden cursor-pointer transition-all duration-500 ease-out transform group ${active === 1 ? 'scale-100 ring-4 ring-indigo-500 ring-offset-4 shadow-2xl z-20' : 'scale-90 opacity-50 hover:opacity-80 hover:scale-95 grayscale'}`}
+            onClick={() => setActive(1)}
+          >
+            <img src={reviews[1].image} alt="Drea" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" loading="eager" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+            <div className="absolute bottom-6 left-6 text-white">
+              <h3 className="text-2xl font-bold">{reviews[1].name}</h3>
+              <p className="text-white/80 text-sm">{reviews[1].role}</p>
+            </div>
+             {/* Animated Progress Bar */}
+             {active === 1 && (
+               <div className="absolute bottom-0 left-0 h-1.5 bg-indigo-500 animate-[progress_8s_linear]"></div>
+            )}
+          </div>
+        </div>
+
+        {/* MOBILE LAYOUT (Tab Switcher) */}
+        <div className="md:hidden">
+            {/* Mobile Tabs */}
+            <div className="flex p-1 bg-slate-100 rounded-xl mb-6 mx-auto max-w-xs shadow-inner">
+                {reviews.map((review, idx) => (
+                <button
+                    key={idx}
+                    onClick={() => setActive(idx)}
+                    className={`flex-1 py-2.5 text-sm font-bold rounded-lg transition-all duration-200 ${active === idx ? 'bg-white text-indigo-600 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                >
+                    {review.name}
+                </button>
+                ))}
+            </div>
+
+            {/* Mobile Card */}
+            <div className="relative bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100">
+                {/* Image Area */}
+                <div className="relative h-[400px] w-full">
+                   {reviews.map((review, idx) => (
+                      <div 
+                        key={idx}
+                        className={`absolute inset-0 transition-opacity duration-500 ${active === idx ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
+                      >
+                         <img src={review.image} alt={review.name} className="w-full h-full object-cover" loading="eager" />
+                         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent"></div>
+                         <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                            <div className="flex justify-between items-end">
+                                <div>
+                                    <h3 className="text-3xl font-bold mb-1">{review.name}</h3>
+                                    <p className="text-white/80 text-sm font-medium">{review.role}</p>
+                                </div>
+                                <div className="bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/20">
+                                    <span className="text-xs font-bold tracking-wide">{review.stat}</span>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                   ))}
+                </div>
+
+                {/* Text Area */}
+                <div className="p-8 relative min-h-[200px] flex items-center">
+                    <Quote className="absolute top-6 left-6 w-8 h-8 text-indigo-500 opacity-20" />
+                    {reviews.map((review, idx) => (
+                         <p 
+                            key={idx}
+                            className={`text-lg text-slate-700 leading-relaxed font-medium transition-all duration-500 absolute inset-x-8 top-1/2 -translate-y-1/2 ${active === idx ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8 pointer-events-none'}`}
+                         >
+                            "{review.quote}"
+                        </p>
+                    ))}
                 </div>
                 
-                {/* Content moved below image to avoid overlay issues */}
-                <div className="p-6 flex-1 flex flex-col justify-between">
-                  <div>
-                    <Quote className="w-8 h-8 text-indigo-500 mb-4 opacity-40" />
-                    <p className="text-slate-700 leading-relaxed font-medium text-lg mb-6">
-                      "{review.quote}"
-                    </p>
-                  </div>
-                  <div className="border-t border-slate-100 pt-4">
-                     <p className="font-bold text-xl text-slate-900">{review.name}</p>
-                     <p className="text-indigo-600 text-sm font-medium">{review.role}</p>
-                  </div>
+                {/* Mobile Progress Bar */}
+                <div key={active} className="h-1 bg-indigo-50 w-full">
+                     <div className="h-full bg-indigo-500 animate-[progress_8s_linear] origin-left"></div>
                 </div>
-              </div>
-            ))}
-          </div>
-          
-          {/* Dots Indicator */}
-          <div className="flex justify-center gap-2 mt-4">
-            {reviews.map((_, idx) => (
-              <div 
-                key={idx}
-                className={`h-1.5 rounded-full transition-all duration-300 ${mobileIndex === idx ? 'w-6 bg-indigo-600' : 'w-1.5 bg-slate-300'}`}
-              />
-            ))}
-          </div>
+            </div>
         </div>
 
-        {/* DESKTOP SIDE-BY-SIDE LAYOUT */}
-        <div className="hidden md:flex flex-row items-stretch justify-center gap-6 h-[600px]">
-          
-          {/* Left Selection - Vanna */}
-          <div 
-            onClick={() => setActiveTab(0)}
-            className={`relative w-1/4 rounded-3xl overflow-hidden cursor-pointer transition-all duration-500 ease-in-out group ${activeTab === 0 ? 'ring-4 ring-indigo-600 ring-offset-4 shadow-2xl' : 'opacity-60 hover:opacity-100 hover:-translate-y-2'}`}
-          >
-            <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-all z-10"></div>
-            <img 
-              src={reviews[0].image} 
-              alt={reviews[0].name} 
-              className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-              loading="eager"
-            />
-            <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-20 pointer-events-none">
-              <p className="text-white font-bold text-xl">{reviews[0].name}</p>
-              <p className="text-slate-200 text-sm">{reviews[0].role}</p>
-            </div>
-          </div>
-
-          {/* Center Content - Active Quote */}
-          <div className="flex-1 bg-white rounded-3xl p-12 shadow-xl border border-slate-100 flex flex-col justify-center relative">
-            <Quote className="w-12 h-12 text-indigo-500 mb-6 opacity-80" />
-            
-            <div className="relative overflow-hidden w-full h-full flex items-center">
-               {reviews.map((review, idx) => (
-                 <div 
-                    key={idx} 
-                    className={`transition-all duration-500 ease-in-out absolute inset-0 flex flex-col justify-center ${
-                      activeTab === idx 
-                        ? 'opacity-100 translate-x-0 relative' 
-                        : 'opacity-0 translate-x-8 absolute pointer-events-none'
-                    }`}
-                    style={{ position: activeTab === idx ? 'relative' : 'absolute', width: '100%' }}
-                 >
-                    <h3 className="text-3xl font-medium text-slate-900 leading-relaxed mb-8">
-                      "{review.quote}"
-                    </h3>
-                    
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-[1px] bg-slate-300"></div>
-                      <span className="font-serif-logo text-xl text-slate-900 font-bold">{review.name}</span>
-                    </div>
-                 </div>
-               ))}
-            </div>
-          </div>
-
-          {/* Right Selection - Drea */}
-          <div 
-            onClick={() => setActiveTab(1)}
-            className={`relative w-1/4 rounded-3xl overflow-hidden cursor-pointer transition-all duration-500 ease-in-out group ${activeTab === 1 ? 'ring-4 ring-indigo-600 ring-offset-4 shadow-2xl' : 'opacity-60 hover:opacity-100 hover:-translate-y-2'}`}
-          >
-            <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-all z-10"></div>
-            <img 
-              src={reviews[1].image} 
-              alt={reviews[1].name} 
-              className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-              loading="eager"
-            />
-            <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-20 pointer-events-none">
-              <p className="text-white font-bold text-xl">{reviews[1].name}</p>
-              <p className="text-slate-200 text-sm">{reviews[1].role}</p>
-            </div>
-          </div>
-
-        </div>
       </div>
+      <style>{`
+        @keyframes progress {
+          from { width: 0%; }
+          to { width: 100%; }
+        }
+      `}</style>
     </Section>
   );
 };
