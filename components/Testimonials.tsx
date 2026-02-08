@@ -11,14 +11,14 @@ const Testimonials: React.FC = () => {
     {
       name: "Vanna",
       role: "Digital Influencer",
-      // Changed .jpeg to .jpg for maximum compatibility
+      // Direct HTTPS .jpg URL
       image: "https://i.imgur.com/dGQn8k9.jpg", 
       quote: "Mistral handles everything automatically, I manage everything from my phone. Since they've protected my content, my earnings have gone up because fans are paying for MY scenes, not leaks."
     },
     {
       name: "Drea",
       role: "Top 0.5% Creator",
-      // Changed .jpeg to .jpg for maximum compatibility
+      // Direct HTTPS .jpg URL
       image: "https://i.imgur.com/LEqd5ia.jpg",
       quote: "I used to spend hours stressing over leaked content appearing on random forums. Mistral wipes them out before I even see them. It's not just protection, it's peace of mind."
     }
@@ -28,7 +28,6 @@ const Testimonials: React.FC = () => {
     if (scrollRef.current) {
       const scrollPosition = scrollRef.current.scrollLeft;
       const cardWidth = scrollRef.current.firstElementChild?.clientWidth || 0;
-      // Using a threshold to determine the active index
       const index = Math.round(scrollPosition / cardWidth);
       setMobileIndex(index);
     }
@@ -58,33 +57,40 @@ const Testimonials: React.FC = () => {
                 key={idx} 
                 className="flex-none w-[85vw] snap-center bg-white rounded-3xl shadow-lg border border-slate-100 overflow-hidden flex flex-col"
               >
-                {/* Updated Image Container for Mobile Framing */}
-                <div className="relative w-full aspect-[4/5] max-h-[420px]">
+                {/* 
+                  Rebuilt Image Container for Mobile:
+                  - Explicit height (h-[400px]) ensures space is reserved.
+                  - No overlay covering the image.
+                  - Direct img tag with object-cover.
+                */}
+                <div className="relative w-full h-[400px] bg-slate-100">
                   <img 
                     src={review.image} 
                     alt={review.name} 
-                    className="w-full h-full object-cover object-center"
+                    className="w-full h-full object-cover block"
                     loading="eager"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90"></div>
-                  <div className="absolute bottom-4 left-6 text-white">
-                     <p className="font-bold text-xl">{review.name}</p>
-                     <p className="text-slate-200 text-sm">{review.role}</p>
-                  </div>
                 </div>
                 
-                <div className="p-6 flex-1 flex flex-col">
-                  <Quote className="w-8 h-8 text-indigo-500 mb-4 opacity-40" />
-                  <p className="text-slate-700 leading-relaxed font-medium text-lg">
-                    "{review.quote}"
-                  </p>
+                {/* Content moved below image to avoid overlay issues */}
+                <div className="p-6 flex-1 flex flex-col justify-between">
+                  <div>
+                    <Quote className="w-8 h-8 text-indigo-500 mb-4 opacity-40" />
+                    <p className="text-slate-700 leading-relaxed font-medium text-lg mb-6">
+                      "{review.quote}"
+                    </p>
+                  </div>
+                  <div className="border-t border-slate-100 pt-4">
+                     <p className="font-bold text-xl text-slate-900">{review.name}</p>
+                     <p className="text-indigo-600 text-sm font-medium">{review.role}</p>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
           
           {/* Dots Indicator */}
-          <div className="flex justify-center gap-2 mt-2">
+          <div className="flex justify-center gap-2 mt-4">
             {reviews.map((_, idx) => (
               <div 
                 key={idx}
@@ -109,7 +115,7 @@ const Testimonials: React.FC = () => {
               className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
               loading="eager"
             />
-            <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-20">
+            <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-20 pointer-events-none">
               <p className="text-white font-bold text-xl">{reviews[0].name}</p>
               <p className="text-slate-200 text-sm">{reviews[0].role}</p>
             </div>
@@ -155,7 +161,7 @@ const Testimonials: React.FC = () => {
               className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
               loading="eager"
             />
-            <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-20">
+            <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-20 pointer-events-none">
               <p className="text-white font-bold text-xl">{reviews[1].name}</p>
               <p className="text-slate-200 text-sm">{reviews[1].role}</p>
             </div>
