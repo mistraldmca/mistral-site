@@ -1,115 +1,99 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Section from './Section';
-import Button from './Button';
-import { Check, Shield, Zap } from 'lucide-react';
+import { Search, Globe, Users, FileWarning, Share2, AlertTriangle } from 'lucide-react';
 
-const Pricing: React.FC = () => {
-  const scrollToContact = () => {
-    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-  };
+const Coverage: React.FC = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
-  const proFeatures = [
-    "DMCA Takedowns",
-    "Google Delisting",
-    "Social Media Removals",
-    "Hourly Scans",
-    "Unlimited Self-Submissions",
-    "Facial Recognition & AI Recognition",
-    "Worldwide Coverage"
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  const items = [
+    {
+      icon: <Globe className="w-6 h-6" />,
+      title: "Tube & Leak Sites",
+      desc: "Instant removal from major adult tube sites and leak aggregators."
+    },
+    {
+      icon: <Search className="w-6 h-6" />,
+      title: "Search Results",
+      desc: "Delisting from Google and Bing to hide leaks from public view."
+    },
+    {
+      icon: <Share2 className="w-6 h-6" />,
+      title: "Social Media",
+      desc: "Takedowns for Twitter (X), Reddit, Instagram, and TikTok reposts."
+    },
+    {
+      icon: <Users className="w-6 h-6" />,
+      title: "Impersonators",
+      desc: "Removal of fake profiles pretending to be you to scam fans."
+    },
+    {
+      icon: <FileWarning className="w-6 h-6" />,
+      title: "File Hosting",
+      desc: "Deindexing from Mega, Dropbox, Google Drive, and torrent sites."
+    },
+    {
+      icon: <AlertTriangle className="w-6 h-6" />,
+      title: "Forums & Boards",
+      desc: "Scrubbing leaked private sets from discussion forums."
+    }
   ];
 
   return (
-    <Section id="pricing" background="gray">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6">Simple, Transparent Pricing</h2>
-          <p className="text-xl text-slate-600">
-            Choose the protection that fits your needs.
-          </p>
+    <Section id="features">
+      <div ref={sectionRef}>
+        <div className={`flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 transition-all duration-700 ease-out transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+          <div className="max-w-xl">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">We Scrub the Entire Web</h2>
+            <p className="text-slate-600 text-lg">
+              Our technology scans thousands of platforms to find where your content is being shared illegally.
+            </p>
+          </div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 items-stretch">
-          {/* Pro Plan */}
-          <div className="relative bg-white rounded-3xl shadow-xl shadow-indigo-200/50 overflow-hidden border border-slate-200 flex flex-col">
-            <div className="absolute top-0 inset-x-0 h-2 bg-gradient-to-r from-indigo-500 to-purple-500"></div>
-            
-            <div className="p-8 md:p-10 flex flex-col h-full">
-               <div className="flex items-center gap-2 mb-6">
-                 <Shield className="text-indigo-600 w-6 h-6" />
-                 <span className="font-bold text-slate-900 tracking-wide uppercase text-sm">Pro Protection</span>
-               </div>
-               
-               <div className="mb-8">
-                 <div className="flex items-baseline gap-1">
-                   <span className="text-4xl md:text-5xl font-bold text-slate-900">$199</span>
-                   <span className="text-slate-500 font-medium">/ month</span>
-                 </div>
-               </div>
-
-               <Button fullWidth size="lg" onClick={scrollToContact} className="mb-8">
-                 Start Free Leak Scan
-               </Button>
-
-               <div className="space-y-4 flex-grow">
-                 <h4 className="font-bold text-slate-900 text-sm uppercase tracking-wide mb-4">Everything included:</h4>
-                 {proFeatures.map((feature, i) => (
-                    <div key={i} className="flex items-start gap-3">
-                      <div className="flex-shrink-0 w-5 h-5 rounded-full bg-green-100 flex items-center justify-center mt-0.5">
-                        <Check className="w-3 h-3 text-green-600" />
-                      </div>
-                      <span className="text-slate-700 font-medium text-sm md:text-base">{feature}</span>
-                    </div>
-                 ))}
-               </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {items.map((item, idx) => (
+            <div
+              key={idx}
+              className={`
+                group flex items-start gap-4 p-6 rounded-2xl bg-slate-50 border border-slate-100
+                hover:border-indigo-300 hover:bg-indigo-50/50 hover:shadow-xl hover:shadow-indigo-100/40 hover:scale-[1.02]
+                transition-all duration-300 ease-out cursor-default transform
+                ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}
+              `}
+              style={{ transitionDelay: `${100 + (idx * 75)}ms` }}
+            >
+              <div className="p-3 bg-white rounded-lg shadow-sm text-indigo-600 shrink-0 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 ring-1 ring-slate-100 group-hover:ring-indigo-500/20">
+                {item.icon}
+              </div>
+              <div>
+                <h3 className="font-bold text-slate-900 mb-1 group-hover:text-indigo-700 transition-colors">{item.title}</h3>
+                <p className="text-sm text-slate-600 transition-opacity group-hover:text-slate-700">{item.desc}</p>
+              </div>
             </div>
-          </div>
-
-          {/* One-Time Removals Plan */}
-          <div className="relative bg-gradient-to-b from-[#F6F3FF] to-white rounded-3xl shadow-2xl shadow-purple-100 border border-indigo-200 overflow-hidden flex flex-col transform md:-translate-y-2 transition-transform">
-            {/* Desktop Badge: Top Right */}
-            <div className="absolute top-6 right-6 z-10 hidden md:block">
-                <span className="bg-purple-100 text-purple-700 text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wide border border-purple-200/50">
-                    Popular for Large Leaks
-                </span>
-            </div>
-            
-            <div className="absolute top-0 inset-x-0 h-2 bg-gradient-to-r from-purple-400 to-indigo-400 opacity-80"></div>
-            
-            <div className="p-8 md:p-10 flex flex-col h-full">
-               <div className="mb-6">
-                   <div className="flex items-center gap-2">
-                     <Zap className="text-purple-600 w-6 h-6" />
-                     <span className="font-bold text-slate-900 tracking-wide uppercase text-sm">One-Time Removals</span>
-                   </div>
-                   {/* Mobile Badge: Below Title */}
-                   <div className="md:hidden mt-3">
-                        <span className="bg-purple-100 text-purple-700 text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wide border border-purple-200/50 inline-block">
-                            Popular for Large Leaks
-                        </span>
-                   </div>
-               </div>
-               
-               <div className="mb-8">
-                  <div className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">Custom</div>
-                  <div className="text-slate-500 font-medium mt-1">pricing</div>
-               </div>
-               
-               <p className="text-lg text-slate-600 mb-8 flex-grow leading-relaxed">
-                 For creators who want everything removed without committing to a monthly plan. Ideal for large leaks or urgent takedowns.
-               </p>
-
-               <Button variant="primary" fullWidth size="lg" onClick={scrollToContact} className="bg-purple-600 hover:bg-purple-700 shadow-purple-200 shadow-lg focus:ring-purple-600">
-                 Contact Us
-               </Button>
-               <p className="text-[11px] text-center text-slate-400 mt-4 font-medium">
-                 Get a quote for your specific needs.
-               </p>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </Section>
   );
 };
 
-export default Pricing;
+export default Coverage;

@@ -1,33 +1,53 @@
 import React from 'react';
-import Section from './Section';
 
-const SupportedPlatforms: React.FC = () => {
-  const platforms = [
-    { name: 'Instagram', color: 'hover:text-pink-600' },
-    { name: 'TikTok', color: 'hover:text-black' },
-    { name: 'OnlyFans', color: 'hover:text-blue-500' },
-    { name: 'Fansly', color: 'hover:text-blue-600' },
-    { name: 'Twitter / X', color: 'hover:text-slate-900' },
-    { name: 'Reddit', color: 'hover:text-orange-500' },
-    { name: 'Google', color: 'hover:text-blue-500' },
-    { name: 'Telegram', color: 'hover:text-sky-500' }
-  ];
-
+const Footer: React.FC = () => {
   return (
-    <Section id="platforms" className="py-12 md:py-16 border-y border-slate-100">
-      <div className="text-center mb-10">
-        <h3 className="text-sm font-bold uppercase tracking-widest text-slate-400">Supported Platforms</h3>
-      </div>
-      
-      <div className="flex flex-wrap justify-center items-center gap-x-12 gap-y-8 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
-        {platforms.map((platform) => (
-          <div key={platform.name} className={`text-xl md:text-2xl font-bold text-slate-400 transition-colors duration-300 cursor-default ${platform.color}`}>
-            {platform.name}
+    <footer className="bg-slate-50 border-t border-slate-200 py-12 md:py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid md:grid-cols-4 gap-12 mb-12">
+          <div className="col-span-1 md:col-span-1">
+            <div className="flex items-center gap-2 mb-4">
+               <span className="font-serif-logo text-2xl text-slate-900">Mistral</span>
+            </div>
+            <p className="text-slate-500 text-sm leading-relaxed">
+              The #1 Brand Protection software for creators. Automate your DMCA takedowns and reclaim your revenue.
+            </p>
           </div>
-        ))}
+          
+          <div>
+            <h4 className="font-bold text-slate-900 mb-4">Product</h4>
+            <ul className="space-y-2 text-sm text-slate-600">
+              <li><a href="#features" className="hover:text-indigo-600">Coverage</a></li>
+              <li><a href="#pricing" className="hover:text-indigo-600">Pricing</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-bold text-slate-900 mb-4">Legal</h4>
+            <ul className="space-y-2 text-sm text-slate-600">
+              <li><a href="#" className="hover:text-indigo-600">Privacy Policy</a></li>
+              <li><a href="#" className="hover:text-indigo-600">Terms of Service</a></li>
+              <li><a href="#" className="hover:text-indigo-600">DMCA Policy</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-bold text-slate-900 mb-4">Contact</h4>
+            <ul className="space-y-2 text-sm text-slate-600">
+              <li>legal@mistral.com</li>
+              <li>support@mistral.com</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="border-t border-slate-200 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-sm text-slate-400">
+            © {new Date().getFullYear()} Mistral. All rights reserved.
+          </p>
+        </div>
       </div>
-    </Section>
+    </footer>
   );
 };
 
-export default SupportedPlatforms;
+export default Footer;

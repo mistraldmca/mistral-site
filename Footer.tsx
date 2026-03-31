@@ -1,30 +1,68 @@
-import React from 'react';
-import Button from './Button';
+import React, { useState } from 'react';
+import Section from './Section';
+import { Plus, Minus } from 'lucide-react';
 
-const FinalCTA: React.FC = () => {
-  const scrollToContact = () => {
-    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-  };
+const FAQ: React.FC = () => {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  const faqs = [
+    {
+      question: "How does the free scan work?",
+      answer: "Our automated system scans millions of websites using facial recognition and keyword matching to find your content. You simply provide your public profile names, and we do the rest. The report is generated instantly."
+    },
+    {
+      question: "How long do removals take?",
+      answer: "It depends on the host. Compliant hosts (like Google, Twitter, Mega) usually remove content within 6-24 hours. Non-compliant hosts may take longer, but we send repeated notices and escalate to ISPs when necessary."
+    },
+    {
+      question: "Do I need to submit links manually?",
+      answer: "No! While you can manually submit specific links if you find them, our AI system automatically finds new leaks 24/7 so you don't have to hunt for them yourself."
+    },
+    {
+      question: "What platforms do you support?",
+      answer: "We support takedowns on all major platforms including Google Search, Bing, Twitter (X), Reddit, Instagram, Facebook, TikTok, Tube sites, file hosting services (Mega, Dropbox), and many forum boards."
+    },
+    {
+      question: "Is this legal?",
+      answer: "Yes. We operate strictly under the Digital Millennium Copyright Act (DMCA). We act as your authorized agent to enforce your intellectual property rights."
+    },
+    {
+      question: "Can I cancel anytime?",
+      answer: "Absolutely. There are no long-term contracts. You can cancel your subscription at any time from your dashboard with one click."
+    }
+  ];
 
   return (
-    <section className="py-24 bg-slate-900 relative overflow-hidden">
-        {/* Abstract shapes */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-600 rounded-full blur-3xl opacity-20 transform translate-x-1/2 -translate-y-1/2"></div>
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-600 rounded-full blur-3xl opacity-20 transform -translate-x-1/2 translate-y-1/2"></div>
-
-      <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
-        <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
-          Stop Leaks Before They <br className="hidden md:block"/> Cost You More
-        </h2>
-        <p className="text-lg text-slate-300 mb-10 max-w-2xl mx-auto">
-          Every minute your content is online illegally, you lose potential subscribers. Take control of your brand today.
-        </p>
-        <Button size="lg" className="bg-white text-slate-900 hover:bg-slate-100 hover:text-indigo-600 shadow-xl shadow-white/10" onClick={scrollToContact}>
-          Start Free Leak Scan
-        </Button>
+    <Section id="faq" background="gray">
+      <div className="max-w-3xl mx-auto">
+        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 text-center mb-12">Frequently Asked Questions</h2>
+        
+        <div className="space-y-4">
+          {faqs.map((faq, index) => (
+            <div key={index} className="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+              <button
+                className="w-full flex items-center justify-between p-6 text-left focus:outline-none"
+                onClick={() => setOpenIndex(openIndex === index ? null : index)}
+              >
+                <span className="font-semibold text-slate-900 pr-8">{faq.question}</span>
+                {openIndex === index ? (
+                  <Minus className="w-5 h-5 text-indigo-600 shrink-0" />
+                ) : (
+                  <Plus className="w-5 h-5 text-slate-400 shrink-0" />
+                )}
+              </button>
+              
+              {openIndex === index && (
+                <div className="px-6 pb-6 text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
+                  {faq.answer}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
-    </section>
+    </Section>
   );
 };
 
-export default FinalCTA;
+export default FAQ;

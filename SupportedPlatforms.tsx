@@ -1,53 +1,30 @@
 import React from 'react';
+import Button from './Button';
 
-const Footer: React.FC = () => {
+const FinalCTA: React.FC = () => {
+  const scrollToContact = () => {
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
-    <footer className="bg-slate-50 border-t border-slate-200 py-12 md:py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-4 gap-12 mb-12">
-          <div className="col-span-1 md:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
-               <span className="font-serif-logo text-2xl text-slate-900">Mistral</span>
-            </div>
-            <p className="text-slate-500 text-sm leading-relaxed">
-              The #1 Brand Protection software for creators. Automate your DMCA takedowns and reclaim your revenue.
-            </p>
-          </div>
-          
-          <div>
-            <h4 className="font-bold text-slate-900 mb-4">Product</h4>
-            <ul className="space-y-2 text-sm text-slate-600">
-              <li><a href="#features" className="hover:text-indigo-600">Coverage</a></li>
-              <li><a href="#pricing" className="hover:text-indigo-600">Pricing</a></li>
-            </ul>
-          </div>
+    <section className="py-24 bg-slate-900 relative overflow-hidden">
+        {/* Abstract shapes */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-600 rounded-full blur-3xl opacity-20 transform translate-x-1/2 -translate-y-1/2"></div>
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-600 rounded-full blur-3xl opacity-20 transform -translate-x-1/2 translate-y-1/2"></div>
 
-          <div>
-            <h4 className="font-bold text-slate-900 mb-4">Legal</h4>
-            <ul className="space-y-2 text-sm text-slate-600">
-              <li><a href="#" className="hover:text-indigo-600">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-indigo-600">Terms of Service</a></li>
-              <li><a href="#" className="hover:text-indigo-600">DMCA Policy</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-bold text-slate-900 mb-4">Contact</h4>
-            <ul className="space-y-2 text-sm text-slate-600">
-              <li>legal@mistral.com</li>
-              <li>support@mistral.com</li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="border-t border-slate-200 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-slate-400">
-            © {new Date().getFullYear()} Mistral. All rights reserved.
-          </p>
-        </div>
+      <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
+        <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
+          Stop Leaks Before They <br className="hidden md:block"/> Cost You More
+        </h2>
+        <p className="text-lg text-slate-300 mb-10 max-w-2xl mx-auto">
+          Every minute your content is online illegally, you lose potential subscribers. Take control of your brand today.
+        </p>
+        <Button size="lg" className="bg-white text-slate-900 hover:bg-slate-100 hover:text-indigo-600 shadow-xl shadow-white/10" onClick={scrollToContact}>
+          Start Free Leak Scan
+        </Button>
       </div>
-    </footer>
+    </section>
   );
 };
 
-export default Footer;
+export default FinalCTA;
